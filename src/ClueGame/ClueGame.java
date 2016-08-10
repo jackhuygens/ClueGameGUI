@@ -3,11 +3,10 @@ package ClueGame;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.UIManager;
-
 import ClueGame.Character.CharName;
 import ClueGame.Location.LocName;
 import ClueGame.Weapon.WeaponType;
+import UI.*;
 
 
 public class ClueGame {
@@ -31,7 +30,7 @@ public class ClueGame {
 		
 	public ClueGame(boolean generate){
 		
-		new UIManager(this);
+		UIManager a = new UIManager(this);
 		fillClueSets();
 		
 		
