@@ -3,6 +3,8 @@ package ClueGame;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.UIManager;
+
 import ClueGame.Character.CharName;
 import ClueGame.Location.LocName;
 import ClueGame.Weapon.WeaponType;
@@ -28,6 +30,8 @@ public class ClueGame {
 	public static boolean useTestingLogic;
 		
 	public ClueGame(boolean generate){
+		
+		new UIManager(this);
 		fillClueSets();
 		
 		
