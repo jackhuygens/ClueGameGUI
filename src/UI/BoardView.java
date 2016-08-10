@@ -4,17 +4,17 @@ import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
-import ClueGame.*;
 
-public class BoardView extends JPanel{
+public class BoardView {
 	
+	private JFrame frame;
+	private JPanel panel;
 	
-	public BoardView(){
-
+	public BoardView(JFrame frame){
+		this.frame = frame;
+		panel = new JPanel();
+		panel.setBackground(Color.GRAY);
+		frame.add(panel, BorderLayout.CENTER);
 	}
 	
-	@Override
-	protected void paintComponent(Graphics g) {
-		
-    }
 }

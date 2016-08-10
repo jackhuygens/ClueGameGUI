@@ -8,24 +8,28 @@ import javax.swing.*;
 import ClueGame.Clue;
 
 @SuppressWarnings("serial")
-public class HandView extends JPanel{
+public class HandView {
+	
+	private JFrame frame;
+	private JPanel panel;
 	
 	protected ArrayList<Clue> hand;
 		
-	public HandView(){
-		add(new JLabel("AA"));
+	public HandView(JFrame frame){
+		
+		this.frame = frame;
+		panel = new JPanel();
+		panel.setLayout(new FlowLayout());
+		panel.add(new JLabel("Cards:"));
+		panel.setBackground(Color.LIGHT_GRAY);
+		panel.setPreferredSize(new Dimension(100, 120));
+		frame.add(panel, BorderLayout.SOUTH);
+		
+		
+		
 	}
 	
-	@Override
-	protected void paintComponent(Graphics g) {
+	public void update() {
 		
-		Graphics2D gg = (Graphics2D) g;
-		gg.setColor(Color.BLUE);
-		
-		int x = 0;
-		for (Clue c : hand){
-	        gg.fill(new Rectangle(x, 0, 10, 10));
-	        x += 20;
-		}
     }
 }
