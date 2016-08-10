@@ -28,6 +28,7 @@ public class UIManager {
 		frame.addWindowListener(new WindowAdapter() {
 		public void windowClosing(WindowEvent windowEvent){ System.exit(0); }});    
 		
+		new MenuManager(frame);
 		handController =  new HandController(new HandView(frame), main.activePlayer);
 		boardController =  new BoardController(new BoardView(frame), main.board);
 		
