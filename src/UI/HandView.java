@@ -18,8 +18,8 @@ public class HandView {
 		this.parent = parent;
 		panel = new JPanel();
 		panel.add(new JLabel("Cards:"));
-		panel.setBackground(Color.GRAY);
-		panel.setPreferredSize(new Dimension(120, 80));
+		panel.setBackground(new Color(236, 242, 248));
+		panel.setPreferredSize(new Dimension(140, 100));
 		parent.add(panel);		
 		
 	}

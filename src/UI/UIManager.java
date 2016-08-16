@@ -38,14 +38,29 @@ public class UIManager {
 		
 		// create side bar panel
 		JPanel handPanel = new JPanel();
-		handPanel.setBackground(Color.LIGHT_GRAY);
+		handPanel.setBackground(new Color(218, 230, 241));
 		handPanel.setPreferredSize(new Dimension(150, 100));
 		frame.add(handPanel, BorderLayout.WEST);
 		
 		// create all other components, and store then in the side bar
+		
+		// start game button:
+		JButton b = new JButton("New Game");
+		b.setPreferredSize(new Dimension(140, 24));
+		b.addActionListener(new ActionListener() { 
+		  public void actionPerformed(ActionEvent e) { 
+			 //cluegame >> new game  
+		  }});
+		handPanel.add(b);
+		
+		// viewers that don't need a controller reference:
 		handController =  new HandController(new HandView(handPanel), main.activePlayer);
-		ChoiceController =  new ChoiceController(new ChoiceView(handPanel), main.input);
 		DiceController =  new DiceController(new DiceView(handPanel), main.input);
+		
+		// viewers that DO need a controller reference:
+		ChoiceView cv = new ChoiceView(handPanel);
+		ChoiceController =  new ChoiceController(cv, main.input);
+		cv.setController(ChoiceController);
 		
 		frame.setVisible(true); 
 	}

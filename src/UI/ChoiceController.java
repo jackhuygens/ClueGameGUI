@@ -15,4 +15,8 @@ public class ChoiceController {
 	public void update(){
 		//view.hand = model.getHand();
 	}
+	
+	public void selectChoice(int no){
+		// inputmanager >> selectChoice()
+	}
 }

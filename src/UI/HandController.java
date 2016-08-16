@@ -10,10 +10,5 @@ public class HandController {
 	public HandController(HandView view, Player model){
 		this.model = model;
 		this.view = view;
-	}
-	
-	public void update(){
-		view.hand = model.getHand();
-	}
-	
+	}	
 }
