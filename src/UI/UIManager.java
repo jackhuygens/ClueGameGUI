@@ -15,6 +15,8 @@ public class UIManager {
 	
 	private HandController handController;
 	private BoardController boardController;
+	private ChoiceController ChoiceController;
+	private DiceController DiceController;
 	
 	public UIManager( ClueGame main){
 		
@@ -29,8 +31,17 @@ public class UIManager {
 		public void windowClosing(WindowEvent windowEvent){ System.exit(0); }});    
 		
 		new MenuManager(frame);
-		handController =  new HandController(new HandView(frame), main.activePlayer);
+		
 		boardController =  new BoardController(new BoardView(frame), main.board);
+		
+		JPanel handPanel = new JPanel();
+		handPanel.setBackground(Color.LIGHT_GRAY);
+		handPanel.setPreferredSize(new Dimension(150, 100));
+		frame.add(handPanel, BorderLayout.WEST);
+		
+		handController =  new HandController(new HandView(handPanel), main.activePlayer);
+		ChoiceController =  new ChoiceController(new ChoiceView(handPanel), main.input);
+		DiceController =  new DiceController(new DiceView(handPanel), main.input);
 		
 		frame.setVisible(true); 
 	}

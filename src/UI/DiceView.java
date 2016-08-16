@@ -2,29 +2,27 @@ package UI;
 
 import java.awt.*;
 import java.util.ArrayList;
-
 import javax.swing.*;
 
 import ClueGame.Clue;
 
-public class HandView {
+public class DiceView {
 	
 	private JPanel panel, parent;
-	
-	protected ArrayList<Clue> hand;
 		
-	public HandView(JPanel parent){
-			
+	public DiceView(JPanel parent){
+		
 		this.parent = parent;
 		panel = new JPanel();
-		panel.add(new JLabel("Cards:"));
+		panel.add(new JLabel("Dice:"));
 		panel.setBackground(Color.GRAY);
-		panel.setPreferredSize(new Dimension(120, 80));
-		parent.add(panel);		
+		panel.setPreferredSize(new Dimension(80, 40));
+		parent.add(panel);
 		
 	}
 	
 	public void update() {
 		
     }
+
 }
