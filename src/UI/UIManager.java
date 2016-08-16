@@ -13,6 +13,7 @@ public class UIManager {
 	private ClueGame main;
 	private JFrame frame;
 	
+	private MenuManager menu;
 	private HandController handController;
 	private BoardController boardController;
 	private ChoiceController ChoiceController;
@@ -23,15 +24,14 @@ public class UIManager {
 		this.main = main;
 		
 		// create frame
-		frame = new JFrame("Java SWING Examples");
+		frame = new JFrame("Cludo");
 		frame.setSize(600,600);
-		frame.setTitle("Cluedo");
 		frame.setLayout(new BorderLayout());
 		frame.addWindowListener(new WindowAdapter() {
 		public void windowClosing(WindowEvent windowEvent){ System.exit(0); }});    
 		
 		// create menus
-		new MenuManager(frame);
+		menu = new MenuManager(frame);
 		
 		// create board panel 
 		boardController =  new BoardController(new BoardView(frame), main.board);
@@ -49,8 +49,7 @@ public class UIManager {
 		b.setPreferredSize(new Dimension(140, 24));
 		b.addActionListener(new ActionListener() { 
 		  public void actionPerformed(ActionEvent e) { 
-			//FIXME  this
-			 //cluegame >> new game  
+			menu.setupGame();  
 		  }});
 		handPanel.add(b);
 		

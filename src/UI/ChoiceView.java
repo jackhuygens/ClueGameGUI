@@ -16,7 +16,7 @@ public class ChoiceView {
 		this.parent = parent;
 		panel = new JPanel();
 		panel.setBackground(new Color(236, 242, 248));
-		panel.setPreferredSize(new Dimension(140, 250));
+		panel.setPreferredSize(new Dimension(140, 300));
 		parent.add(panel);
 		
 		//FIXME delete this
