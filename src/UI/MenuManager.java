@@ -11,6 +11,8 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 
 public class MenuManager {
 	
@@ -34,25 +36,35 @@ public class MenuManager {
 	}
 	
 	public void setupGame(){
+		choosePlayerCount();
+	}
+	
+	public void choosePlayerInfo(int count){
 		
 		JFrame newGameFrame = new JFrame("New Game");
-		newGameFrame.setSize(400,400);
-		//frame.setLayout(new BorderLayout());
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(218, 230, 241));
-		panel.setPreferredSize(new Dimension(150, 100));
-		newGameFrame.add(panel);
-
+		newGameFrame.setSize(400,count * 100 + 30);	
 		newGameFrame.setVisible(true); 
 		
-		choosePlayerCount();
+		JPanel mainPanel = new JPanel();
+		mainPanel.setBackground(new Color(218, 230, 241));
+		newGameFrame.add(mainPanel);
+		
+		//frame.setLayout(new GridLayout(1, count));
+		
+		for(int i = 1; i <= count; i++){
+			JPanel panel = new JPanel();
+			panel.setBorder(new EmptyBorder(10, 10, 10, 10));
+			panel.setBackground(new Color(236, 242, 248));
+			panel.setPreferredSize(new Dimension(390, 80));
+			mainPanel.add(panel);
+		}
+
+		newGameFrame.setVisible(true); 
 	}
 	
 	public void choosePlayerCount(){
 		
 		JFrame playerCountFrame = new JFrame("Choose players");
-		//playerCountFrame.setLayout(new GridLayout(1,2));
 		playerCountFrame.setSize(200,100);
 		
 		JPanel panel = new JPanel();
@@ -70,11 +82,10 @@ public class MenuManager {
 	    panel.add(playersCombo);
 		
 		JButton b = new JButton("Ok");
-		//b.setPreferredSize(new Dimension(45, 24));
 		b.addActionListener(new ActionListener() { 
 		  public void actionPerformed(ActionEvent e) { 
-			//FIXME  this
-			 //controller >> rollDice, maybe?   
+			  choosePlayerInfo(playersCombo.getSelectedIndex()+1);
+			  playerCountFrame.setVisible(false); 
 		  }});
 		panel.add(b);
 		
