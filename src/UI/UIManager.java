@@ -49,6 +49,7 @@ public class UIManager {
 		b.setPreferredSize(new Dimension(140, 24));
 		b.addActionListener(new ActionListener() { 
 		  public void actionPerformed(ActionEvent e) { 
+			//FIXME  this
 			 //cluegame >> new game  
 		  }});
 		handPanel.add(b);

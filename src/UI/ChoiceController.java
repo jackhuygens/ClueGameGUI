@@ -13,10 +13,12 @@ public class ChoiceController {
 	}
 	
 	public void update(){
+		//FIXME  this
 		//view.hand = model.getHand();
 	}
 	
 	public void selectChoice(int no){
+		//FIXME this
 		// inputmanager >> selectChoice()
 	}
 }

@@ -15,11 +15,11 @@ public class ChoiceView {
 	public ChoiceView(JPanel parent){
 		this.parent = parent;
 		panel = new JPanel();
-		panel.add(new JLabel("Choice:"));
 		panel.setBackground(new Color(236, 242, 248));
 		panel.setPreferredSize(new Dimension(140, 250));
 		parent.add(panel);
 		
+		//FIXME delete this
 		setChoices(new String[] {
 				"1 - Show Hand",
 				"2 - Suggest",

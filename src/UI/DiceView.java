@@ -21,6 +21,7 @@ public class DiceView {
 		panel.setPreferredSize(new Dimension(140, 55));
 		parent.add(panel);
 		
+		//FIXME delete this
 		setDice(5);
 		
 	}
@@ -34,6 +35,7 @@ public class DiceView {
 		b.setPreferredSize(new Dimension(45, 45));
 		b.addActionListener(new ActionListener() { 
 		  public void actionPerformed(ActionEvent e) { 
+			//FIXME  this
 			 //controller >> rollDice, maybe?   
 		  }});
 		panel.add(b);
