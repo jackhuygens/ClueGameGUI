@@ -24,18 +24,27 @@ public class ClueGame {
 	public Player[] players;
 	int numPly; //Number of players
 	public Player activePlayer;
+	UIManager UI;
 	
 	public boolean playing = true;
 	public static boolean useTestingLogic;
+	
 		
 	public ClueGame(boolean generate){
 		
-		UIManager a = new UIManager(this);
+		UI = new UIManager(this);
+		
+	}
+	
+	public void setPlayerCount(int i) {
+		numPly = i;
+	}
+	
+	public void setupGame(int playerNo){
 		fillClueSets();
-		
-		
+			
 		//Setting up players.
-		numPly = input.getPlayerCount();
+		numPly = playerNo;
 		players = new Player[numPly];
 		for (int i = 0; i < numPly; i++){
 			players[i] = new Player (i + 1);
@@ -45,27 +54,11 @@ public class ClueGame {
 		
 		activePlayer = players[0];
 		
+		solution = generateSolution(); //Make enveloped solution
+		shuffleAndFill(); //Deal cards to players
 		
-		if (generate){
-			solution = generateSolution(); //Make enveloped solution
-			shuffleAndFill(); //Deal cards to players
-		}
-		
-		
-		// Main game loop
-		while (playing){
-			System.out.println("--------------");
-			System.out.println(board.renderBoard());
-			System.out.println("--------------");
-			System.out.println("It is Player: " + activePlayer.getNumber() + "'s [" + board.getPlayerIcon(activePlayer) + "] turn.");	
-			System.out.println("You are playing as " + activePlayer.getCharacter().getType());	
-			System.out.println("--------------");
-			input.processInput(false);	
-			endTurn();
-			
-		}
 	}
-	
+
 	public static void main(String[] args) {
 		new ClueGame(true);
 	}

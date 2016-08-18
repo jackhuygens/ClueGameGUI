@@ -4,14 +4,16 @@ package ClueGame;
 import java.util.*;
 import ClueGame.Location.LocName;
 import ClueGame.Weapon.WeaponType;
+import UI.ChoiceController;
 import ClueGame.Character.CharName;
 
 public class InputManager {
 
 	//Ideally this class should do nothing but process input and instruct main game class.
 	
-	private Scanner scan = new Scanner (System.in);
 	private ClueGame game;
+	private int state = 0;
+	public ChoiceController cc = game.UI.ChoiceController;
 	
 	public InputManager(ClueGame game){
 		this.game = game;
@@ -24,77 +26,52 @@ public class InputManager {
 	 * @param cannotMove Boolean for whether the player is allowed to move.
 	 */
 	public void processInput(boolean cannotMove){
-		boolean loop = true;
-		while (loop){
 			
-			if(game.activePlayer.inRoom()){ //Choices if players are in a room
-				
-				System.out.println("You are in the " + game.activePlayer.getCurrentRoom().name() + ", choose your next move");
-				int choice = 0;
-				if(cannotMove){
-					choice = getActionFromList(new String[] {
-							"Show Hand",
-							"Suggest",
-							"Accuse",
-							"End turn",
-							"Quit game"});
-					choice ++;
+	}
+	
+	
+	public void sendChoices(){
+		if (state == 1){ //State 1 = Between rooms
+			cc.setChoices(new String[]{"Move", "End turn"}, "You are not in a room");
+		}
+		else if (state == 2){ //State 2 = In Room
+			cc.setChoices(new String[]{"Move", "Suggest","Accuse", "End turn"}, "You are in a room");
+		}
+		else {
+			cc.setChoices(null, null);
+		}
+	}
+	
+	public void activateChoice(int i){
+		if (state == 1){
+			switch (i){
+				case 0:
+					moveCommand();
+					break;
+				case 1:
+					game.endTurn();
+					break;
 					
-				}
-				else{
-					choice = getActionFromList(new String[] {
-							"Move",
-							"Show Hand",
-							"Suggest",
-							"Accuse",
-							"End turn",
-							"Quit game"});
-				}
-				
-				switch (choice){
-				case 0: //Move
-					moveCommand();
-					return;
-				case 1: //Print hand
-					printHand();
-					break;
-				case 2: //Suggest
-					makeSuggestion();
-					return;
-				case 3: //Accuse
-					makeAccusal();
-					return;
-				case 4: //End Turn
-					return;
-				case 5: //End Turn
-					game.endGame();
-					return;
-				}	
 			}
-			else{ //Choices if players are NOT in a room
+		}else if (state == 2){
+			switch (i){
+			case 0:
+				moveCommand();
+				break;
+			case 1:
+				makeSuggestion();
+				break;
+			case 2:
+				makeAccusal();
+				break;
+			case 3:
+				game.endTurn();
+				break;
 				
-				System.out.println("Choose your next move");
-				int choice = getActionFromList(new String[] {
-						"Move",
-						"View Cards",
-						"End turn",
-						"Quit game"});
-				
-				switch (choice){
-				case 0: //Move
-					moveCommand();
-					return;
-				case 1: //Print hand
-					printHand();
-					break;
-				case 2: //End turn
-					return;
-				case 3: //End turn
-					game.endGame();
-					return;
-				}	
-			}
-		}	
+		}
+	}
+		
+		
 	}
 	
 	/**
@@ -422,19 +399,14 @@ public class InputManager {
 		while(true){
 			System.out.println("please enter the number of your choice : ");
 			
-			if(ClueGame.useTestingLogic){
-				
-				//if (Tests.queue.peek() != null){return Tests.queue.poll() - 1;}
-			}
-			String input = scan.next();
-			try{
-				int res = Integer.parseInt(input);
-				if(res <= list.length)
-					return res-1;
-			}
-			catch (NumberFormatException e){
-				continue;
-			}
+			//try{
+				//int res = Integer.parseInt(input);
+				//if(res <= list.length)
+				//	return res-1;
+			//}
+			//catch (NumberFormatException e){
+			//	continue;
+			//}
 		}
 	}	
 }
