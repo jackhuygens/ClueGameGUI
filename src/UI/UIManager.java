@@ -13,11 +13,11 @@ public class UIManager {
 	public ClueGame main;
 	private JFrame frame;
 	
-	private MenuManager menu;
-	private HandController handController;
-	private BoardController boardController;
-	private ChoiceController ChoiceController;
-	private DiceController DiceController;
+	public MenuManager menu;
+	public HandController handController;
+	public BoardController boardController;
+	public ChoiceController ChoiceController;
+	public DiceController DiceController;
 	
 	public UIManager( ClueGame main){
 		
