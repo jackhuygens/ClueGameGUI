@@ -39,8 +39,10 @@ public class MenuManager {
 	
 	public void choosePlayerInfo(int count){
 		
+		main.main.setupGame(count);
+		
 		JFrame newGameFrame = new JFrame("New Game");
-		newGameFrame.setSize(400,count * 100 + 30);	
+		newGameFrame.setSize(470,count * 100 + 30);	
 		newGameFrame.setVisible(true); 
 		
 		JPanel mainPanel = new JPanel();
@@ -53,11 +55,10 @@ public class MenuManager {
 			playerSettings.add(panel);
 			panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 			panel.setBackground(new Color(236, 242, 248));
-			panel.setPreferredSize(new Dimension(390, 80));
-			refreshPlayerPanel(i-1);
+			panel.setPreferredSize(new Dimension(450, 80));
 			mainPanel.add(panel);
 		}
-
+		refreshAllPlayerPanels();
 		newGameFrame.setVisible(true); 
 	}
 	
@@ -95,6 +96,7 @@ public class MenuManager {
 		for(int i = 0; i < playerSettings.size(); i++){
 			refreshPlayerPanel(i);
 		}
+		
 	}
 		
 	public void refreshPlayerPanel(int index){
@@ -108,35 +110,34 @@ public class MenuManager {
 		ArrayList<JRadioButton> charNames = new ArrayList<JRadioButton>();
 		ArrayList<Boolean> charNamesChosen = new ArrayList<Boolean>();
 		ButtonGroup group = new ButtonGroup();
-		
-		//FIXME get rid of this
-		Player[] playersT = new Player[6];
-		for (int i = 0; i < 6; i++){
-			playersT[i] = new Player (i + 1);
-			playersT[i].setCharacter(new Character(Character.CharName.Mrs_White));
-		}
 				
+		Player[] players = main.main.getPlayers();
+		
 		for(int i = 0; i < 6; i++){
-			//FIXME get rid of this
-			//Player[] p = main.main.getPlayers();
-			Player[] p = playersT;
+			
 			boolean chosen = false;
-			for(int a = 0; a < p.length; a++){
-				if(p[a].getCharacter().getName().ordinal() == i)
+			for(int a = 0; a < players.length; a++){
+				if(players[a].getCharacter().getName().ordinal() == i)
 					chosen = true;
 			}
 			charNamesChosen.add(chosen);
 		}
 		
 		for(int i = 0; i < 6; i++){
-			JRadioButton character = new JRadioButton(Character.CharName.values()[i].name());
+			final int tempI = i;
+			boolean active = players[index].getCharacter().getName().ordinal() == i;
+			JRadioButton character = new JRadioButton(Character.CharName.values()[i].name(), active);
 			character.setEnabled(!charNamesChosen.get(i));
 			charNames.add(character);
 			group.add(character);
 			character.addItemListener(new ItemListener() {
-		         public void itemStateChanged(ItemEvent e) {         
-		            //statusLabel.setText("Apple RadioButton: " 
-		            //+ (e.getStateChange()==1?"checked":"unchecked"));
+		         public void itemStateChanged(ItemEvent e) {     
+			         if(e.getStateChange() == 1){
+			        	 players[index].setCharacter(new Character(Character.CharName.values()[tempI]));
+			        	 panel.revalidate();
+			        	 panel.repaint();
+			        	 refreshAllPlayerPanels();
+			         }
 		         }
 		      });
 		}
