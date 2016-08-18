@@ -19,7 +19,7 @@ public class ClueGame {
 	public Solution solution;
 	
 	public Board board = new Board(this);
-	public InputManager input = new InputManager(this);
+	public InputManager input;
 	
 	public Player[] players;
 	int numPly; //Number of players
@@ -33,7 +33,7 @@ public class ClueGame {
 	public ClueGame(boolean generate){
 		
 		UI = new UIManager(this);
-		
+		input = new InputManager(this, UI.ChoiceController);
 	}
 	
 	public void setPlayerCount(int i) {

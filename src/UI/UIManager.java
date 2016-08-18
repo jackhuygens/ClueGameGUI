@@ -34,7 +34,10 @@ public class UIManager {
 		menu = new MenuManager(this, frame);
 		
 		// create board panel 
-		boardController =  new BoardController(new BoardView(frame), main.board);
+		BoardView view = new BoardView(main);
+		view.setBackground(Color.GRAY);
+		frame.add(view, BorderLayout.CENTER);
+		boardController =  new BoardController(view, main.board);
 		
 		// create side bar panel
 		JPanel handPanel = new JPanel();

@@ -4,17 +4,23 @@ import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
+import ClueGame.ClueGame;
 
-public class BoardView {
+
+public class BoardView extends JPanel{
 	
-	private JFrame frame;
-	private JPanel panel;
+	ClueGame game;
 	
-	public BoardView(JFrame frame){
-		this.frame = frame;
-		panel = new JPanel();
-		panel.setBackground(Color.GRAY);
-		frame.add(panel, BorderLayout.CENTER);
+	
+	public BoardView(ClueGame game){
+		this.game = game;
 	}
+	
+	public void paint(Graphics g){
+		if (game.players == null){return;}
+		g.setColor(Color.cyan);
+		g.fillRect(0, 0, 500, 500);
+	}
+	
 	
 }

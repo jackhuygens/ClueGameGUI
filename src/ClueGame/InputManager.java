@@ -13,10 +13,11 @@ public class InputManager {
 	
 	private ClueGame game;
 	private int state = 0;
-	public ChoiceController cc = game.UI.ChoiceController;
+	public ChoiceController cc;
 	
-	public InputManager(ClueGame game){
+	public InputManager(ClueGame game, ChoiceController cc){
 		this.game = game;
+		this.cc = cc;
 	}
 	
 	/**
