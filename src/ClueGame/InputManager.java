@@ -13,6 +13,19 @@ public class InputManager {
 	
 	private ClueGame game;
 	private int state = 0;
+	private CharName storeChar = CharName.Miss_Scarlet;
+	private WeaponType storeWep = WeaponType.CANDLESTICK;
+	private LocName storeLoc = LocName.BALL_ROOM;
+	/*
+	 * States:
+	 * 0 = setup
+	 * 1 = player in hallway
+	 * 2 = player in room
+	 * 3 = suggestion part 1
+	 * 4 = suggest part 2
+	 * 
+	 * 
+	 */
 	public ChoiceController cc;
 	
 	public InputManager(ClueGame game, ChoiceController cc){
@@ -37,6 +50,10 @@ public class InputManager {
 		}
 		else if (state == 2){ //State 2 = In Room
 			cc.setChoices(new String[]{"Move", "Suggest","Accuse", "End turn"}, "You are in a room");
+		}else if (state == 3){ //State 3 = Suggestion part 1
+			cc.setChoices(new String[]{"Mrs Peacock", "Colonel Mustard","Miss Scarlet", "Mrs White", "Professor Plum", "Reverend Green"}, "Who do you Suggest?");
+		}else if (state == 4){ //State 4  = Suggestion part 2
+			cc.setChoices(new String[]{"Candlestick", "Dagger","Lead Pipe", "Revolver", "Rope", "Spanner"}, "What weapon do you Suggest?");
 		}
 		else {
 			cc.setChoices(null, null);
@@ -44,7 +61,7 @@ public class InputManager {
 	}
 	
 	public void activateChoice(int i){
-		if (state == 1){
+		if (state == 1){ //In hallways
 			switch (i){
 				case 0:
 					moveCommand();
@@ -54,13 +71,13 @@ public class InputManager {
 					break;
 					
 			}
-		}else if (state == 2){
+		}else if (state == 2){ //In room
 			switch (i){
 			case 0:
 				moveCommand();
 				break;
 			case 1:
-				makeSuggestion();
+				state = 3; //Set to suggestion part 1
 				break;
 			case 2:
 				makeAccusal();
@@ -68,12 +85,29 @@ public class InputManager {
 			case 3:
 				game.endTurn();
 				break;
-				
+			}	
+		}else if (state == 3){ //Suggestion part 1
+			String[] chars = new String[]{"Mrs Peacock", "Colonel Mustard","Miss Scarlet", "Mrs White", "Professor Plum", "Reverend Green"};
+			for (CharName c : CharName.values()){
+				if (c.toString().equals(chars[i])){
+					storeChar = c;
+				}
+			}
+			state++;
+		}else if (state == 4){ //Suggestion part 1
+			String[] weps = new String[]{"Candlestick", "Dagger","Lead Pipe", "Revolver", "Rope", "Spanner"};
+			for (WeaponType w : WeaponType.values()){
+				if (w.toString().equals(weps[i])){
+					storeWep = w;
+				}
+			}
+			state = 2;
+			game.makeSuggest(game.activePlayer.getCurrentRoom(), new Weapon(storeWep), new Character(storeChar));
 		}
 	}
 		
 		
-	}
+	
 	
 	/**
 	 * 

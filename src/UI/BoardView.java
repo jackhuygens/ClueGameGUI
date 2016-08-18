@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import ClueGame.ClueGame;
+import ClueGame.Player;
 
 
 public class BoardView extends JPanel{
@@ -20,6 +21,10 @@ public class BoardView extends JPanel{
 		if (game.players == null){return;}
 		g.setColor(Color.cyan);
 		g.fillRect(0, 0, 500, 500);
+		
+		for (Player p : game.players){
+			g.fillOval(p.getPosition().col * 20, p.getPosition().row * 20, 20, 20);
+		}
 	}
 	
 	
