@@ -10,7 +10,7 @@ import ClueGame.*;
 
 public class UIManager {
 	
-	private ClueGame main;
+	public ClueGame main;
 	private JFrame frame;
 	
 	private MenuManager menu;
@@ -31,7 +31,7 @@ public class UIManager {
 		public void windowClosing(WindowEvent windowEvent){ System.exit(0); }});    
 		
 		// create menus
-		menu = new MenuManager(frame);
+		menu = new MenuManager(this, frame);
 		
 		// create board panel 
 		boardController =  new BoardController(new BoardView(frame), main.board);

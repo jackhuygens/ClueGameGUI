@@ -3,7 +3,7 @@ package ClueGame;
 
 public class Character implements Clue{
 
-private CharName name;
+	private CharName name;
 	
 	public enum CharName{
 		Miss_Scarlet,
@@ -20,5 +20,9 @@ private CharName name;
 	
 	public String getType(){
 		return name.name();
+	}
+	
+	public CharName getName(){
+		return name;
 	}
 }
