@@ -59,6 +59,17 @@ public class MenuManager {
 			mainPanel.add(panel);
 		}
 		refreshAllPlayerPanels();
+		
+		JButton b = new JButton("Done");
+		b.setPreferredSize(new Dimension(140, 24));
+		b.addActionListener(new ActionListener() { 
+		  public void actionPerformed(ActionEvent e) { 
+			  //FIXME
+			  newGameFrame.setVisible(false); 
+			//menu.setupGame();  
+		  }});
+		mainPanel.add(b);
+		
 		newGameFrame.setVisible(true); 
 	}
 	
@@ -117,7 +128,8 @@ public class MenuManager {
 			
 			boolean chosen = false;
 			for(int a = 0; a < players.length; a++){
-				if(players[a].getCharacter().getName().ordinal() == i)
+				int val = players[a].getCharacter().getName().ordinal();
+				if(val == i)
 					chosen = true;
 			}
 			charNamesChosen.add(chosen);
