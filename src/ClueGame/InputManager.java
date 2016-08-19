@@ -12,7 +12,7 @@ public class InputManager {
 	//Ideally this class should do nothing but process input and instruct main game class.
 	
 	private ClueGame game;
-	private int state = 0;
+	public int state = 0;
 	private CharName storeChar = CharName.Miss_Scarlet;
 	private WeaponType storeWep = WeaponType.CANDLESTICK;
 	private LocName storeLoc = LocName.BALL_ROOM;
@@ -31,6 +31,7 @@ public class InputManager {
 	public InputManager(ClueGame game, ChoiceController cc){
 		this.game = game;
 		this.cc = cc;
+		cc.setModel(this);
 	}
 	
 	/**
@@ -330,51 +331,7 @@ public class InputManager {
 			canMove = 100;
 		System.out.println("You rolled: " + canMove);
 		
-		while(true){
-			
-			int choice;
-			
-			if(game.activePlayer.inRoom()){
-				System.out.println("You are in a room, which door do you wish to leave from?");
-				choice = getActionFromList(new String[] {
-						"North",
-						"South",
-						"East",
-						"West",
-						"Stay in this room" });
-			}
-			else{
-				System.out.println("Choose a direction to move");
-				choice = getActionFromList(new String[] {
-						"North",
-						"South",
-						"East",
-						"West",
-						"Stop moving" });
-			}
-			
-			if(choice == 4)
-				return;
-			
-			if (game.board.movePlayer(game.activePlayer, convertInputToVector(choice))){
-				System.out.println("--------------");
-				System.out.println(game.board.renderBoard());
-				System.out.println("--------------");
-				System.out.println("You moved. Moves remaining : " + (canMove-1));
-				if(game.activePlayer.inRoom()){
-					System.out.println("you have entered the " + game.activePlayer.getCurrentRoom() + "!");
-					processInput(true);
-					return;
-				}
-				canMove--;
-			} else {
-				System.out.println("You cannot move here!");
-			}	 
-			
-			if(canMove == 0){
-				return;
-			}	
-		}
+		
 	}
 	
 	/**

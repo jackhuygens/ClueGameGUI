@@ -22,6 +22,7 @@ public class BoardView extends JPanel{
 		g.setColor(Color.cyan);
 		g.fillRect(0, 0, 500, 500);
 		
+		g.setColor(Color.red);
 		for (Player p : game.players){
 			g.fillOval(p.getPosition().col * 20, p.getPosition().row * 20, 20, 20);
 		}

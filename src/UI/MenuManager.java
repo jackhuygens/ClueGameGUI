@@ -66,7 +66,7 @@ public class MenuManager {
 		  public void actionPerformed(ActionEvent e) { 
 			  //FIXME
 			  newGameFrame.setVisible(false); 
-			//menu.setupGame();  
+			  main.main.startGame(); 
 		  }});
 		mainPanel.add(b);
 		

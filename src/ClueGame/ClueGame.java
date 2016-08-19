@@ -58,6 +58,14 @@ public class ClueGame {
 		shuffleAndFill(); //Deal cards to players
 		
 	}
+	
+	public void startGame(){
+		for (Player p : players){
+			board.spawnPlayer(p);
+		}
+		input.state = 1;
+		input.sendChoices();
+	}
 
 	public static void main(String[] args) {
 		new ClueGame(true);
@@ -89,7 +97,9 @@ public class ClueGame {
 			if (nextPlayer == numPly)
 				nextPlayer = 0;
 			if(players[nextPlayer].getActive()){
-				activePlayer = players[nextPlayer]; 
+				activePlayer = players[nextPlayer];
+				if (activePlayer.inRoom()){input.state = 2;} else {input.state = 1;}
+				input.sendChoices();
 				break;
 			}
 			nextPlayer++;

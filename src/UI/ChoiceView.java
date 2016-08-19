@@ -18,15 +18,6 @@ public class ChoiceView {
 		panel.setBackground(new Color(236, 242, 248));
 		panel.setPreferredSize(new Dimension(140, 300));
 		parent.add(panel);
-		
-		//FIXME delete this
-		setChoices(new String[] {
-				"1 - Show Hand",
-				"2 - Suggest",
-				"3 - Accuse",
-				"4 - End turn",
-				"5 - Quit game"}, "You are in the BALLROOM, choose your next move:");
-		
 	}
 	
 	public void setController(ChoiceController controller){
@@ -51,6 +42,8 @@ public class ChoiceView {
 				 controller.selectChoice(tempI);   
 			  }});
 			panel.add(b);
+			panel.revalidate();
+       	 	panel.repaint();
 		}
 	}
 }

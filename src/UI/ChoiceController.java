@@ -12,6 +12,10 @@ public class ChoiceController {
 		this.view = view;
 	}
 	
+	public void setModel(InputManager model){
+		this.model = model;
+	}
+	
 	public void setChoices(String[] choices, String status){
 		view.setChoices(choices, status);
 	}
