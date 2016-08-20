@@ -65,6 +65,7 @@ public class ClueGame {
 		}
 		input.state = 1;
 		input.sendChoices();
+		UI.boardController.getView().repaint();
 	}
 
 	public static void main(String[] args) {

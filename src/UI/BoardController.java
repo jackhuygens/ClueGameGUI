@@ -12,6 +12,10 @@ public class BoardController {
 		this.view = view;
 	}
 	
+	public BoardView getView(){
+		return view;
+	}
+	
 	public void update(){
 		
 	}
