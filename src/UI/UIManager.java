@@ -27,8 +27,13 @@ public class UIManager {
 		frame = new JFrame("Cludo");
 		frame.setSize(600,600);
 		frame.setLayout(new BorderLayout());
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() {
-		public void windowClosing(WindowEvent windowEvent){ System.exit(0); }});    
+		public void windowClosing(WindowEvent windowEvent){ 
+			  	int answer = JOptionPane.showConfirmDialog(frame, "Are you sure you want to quit?", "Quit", JOptionPane.YES_NO_OPTION);
+			  	if (answer == JOptionPane.YES_OPTION)
+			  		System.exit(0);
+			  }});    
 		
 		// create menus
 		menu = new MenuManager(this, frame);

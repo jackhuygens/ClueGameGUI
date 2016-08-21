@@ -12,6 +12,7 @@ public class Player {
 	private Character playerChar; //Still needs to be assigned
 	private Coordinate position;
 	private LocName currentRoom;
+	private String name;
 	
 	ArrayList<Clue> hand = new ArrayList<Clue>();
 	
@@ -22,10 +23,15 @@ public class Player {
 	public boolean getActive(){
 		return active;
 	}
-	
-	
 	public void setActive(boolean val){
 		active = val;
+	}
+	
+	public String getName(){
+		return name;
+	}
+	public void setName(String val){
+		name = val;
 	}
 	
 	/**

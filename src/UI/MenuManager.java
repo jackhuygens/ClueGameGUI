@@ -138,18 +138,25 @@ public class MenuManager {
 		
 	public void refreshPlayerPanel(int index){
 		
+		Player[] players = main.main.getPlayers();
+		
 		JPanel panel = playerSettings.get(index);
 		panel.removeAll();
-		JTextField name = new JTextField("");
+		
+		final JTextField name = new JTextField(players[index].getName());
 		name.setPreferredSize(new Dimension(100, 24));
+		name.addActionListener(new ActionListener() {
+		      public void actionPerformed(ActionEvent e) {
+		        players[index].setName(name.getText());
+		      }
+		    });
 		panel.add(name);
 		
 		ArrayList<JRadioButton> charNames = new ArrayList<JRadioButton>();
 		ArrayList<Boolean> charNamesChosen = new ArrayList<Boolean>();
 		ButtonGroup group = new ButtonGroup();
 				
-		Player[] players = main.main.getPlayers();
-		
+	
 		for(int i = 0; i < 6; i++){
 			
 			boolean chosen = false;
