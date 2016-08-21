@@ -23,10 +23,23 @@ public class BoardView extends JPanel implements MouseListener{
 		addMouseListener(this);
 	}
 	
+	/**
+	 * 
+	 * Sets the boolean value for whether to act on mouse clicks on the board (essentially if the player can
+	 * move or not)
+	 * 
+	 * @param canmove
+	 */
 	public void canMove(boolean canmove){
 		moving = canmove;
 	}
 	
+	/**
+	 * 
+	 * Paints the board and the players
+	 * 
+	 * 
+	 */
 	public void paint(Graphics g){
 		final int[][] tiles =  new int[][] {
 			{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4},
@@ -58,7 +71,7 @@ public class BoardView extends JPanel implements MouseListener{
 			{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4}
 		};
 		
-		if (game.players == null){return;}
+		if (game.players == null){return;}//Dont paint if game is not set up yet
 		super.paintComponent(g);
 		
 		int x = 0;
@@ -96,11 +109,11 @@ public class BoardView extends JPanel implements MouseListener{
 						break;
 				}
 				
+				//Act on mouse inputs
 				if(pressed != null && new Rectangle(x, y, size, size).contains(pressed) && moving){
-					System.out.println("You clicked coordinate: " + (k - 1) + " " + (i - 1));
 					g.setColor(Color.black);
 					g.fillRect(x + 2, y + 2, size - 4, size - 4);
-					game.beginMove((k - 1), (i - 1), game.UI.DiceController.getValue());
+					game.beginMove((k - 1), (i - 1));
 				}
 				
 				x += size;
@@ -108,7 +121,7 @@ public class BoardView extends JPanel implements MouseListener{
 			y += size;
 		}
 		
-		
+		//Paint players
 		for (Player p : game.players){ //REMEMBER! Added an extra outer layer of tiles, so player coordinates need to be shifted by 1
 			
 			switch (p.getCharacter().getName()){
@@ -159,9 +172,7 @@ public class BoardView extends JPanel implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		System.out.println("Click!");
 		pressed = arg0.getPoint();
-		System.out.println(pressed.getX() + " " + pressed.getY());
 		repaint();
 		
 	}

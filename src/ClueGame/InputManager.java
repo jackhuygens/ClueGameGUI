@@ -13,7 +13,7 @@ public class InputManager {
 	
 	private ClueGame game;
 	public int state = 0;
-	private CharName storeChar = CharName.Miss_Scarlet;
+	private CharName storeChar = CharName.Miss_Scarlet; //Defaults for initialization purposes
 	private WeaponType storeWep = WeaponType.CANDLESTICK;
 	private LocName storeLoc = LocName.BALL_ROOM;
 	/*
@@ -38,11 +38,16 @@ public class InputManager {
 		cc.setModel(this);
 	}
 		
-	
+	/**
+	 * 
+	 * Sends the updated list of the players available actions to the UI, depending 
+	 * on the state
+	 * 
+	 */
 	public void sendChoices(){
 		if (state == 1){ //State 1 = Between rooms
 			cc.setChoices(new String[]{"Move", "End turn"}, "You are in the hallways");
-		}else if (state == 8){ //State 8 = Between rooms and cannot move'
+		}else if (state == 8){ //State 8 = Between rooms and cannot roll dice again'
 			cc.setChoices(new String[]{"End turn"}, "You are in the hallways");
 		}else if (state == 2){ //State 2 = In Room'
 			cc.setChoices(new String[]{"Move", "Suggest","Accuse", "End turn"}, "You are in the " + game.activePlayer.getCurrentRoom());
@@ -62,6 +67,14 @@ public class InputManager {
 		}
 	}
 	
+	
+	
+	/**
+	 * 
+	 * Takes the input from the UI action buttons and acts on it, according to the state and input
+	 * 
+	 * @param i The players chosen input number from the UI buttons
+	 */
 	public void activateChoice(int i){
 		if (state == 1){ //In hallways
 			switch (i){
@@ -73,7 +86,7 @@ public class InputManager {
 					break;
 					
 			}
-		}else if (state == 8){
+		}else if (state == 8){ //In Hallways and can not re-roll the dice
 			switch (i){
 			case 0:
 				game.endTurn();
@@ -96,6 +109,10 @@ public class InputManager {
 				game.endTurn();
 				break;
 			}	
+			
+			//Suggestion and accusal have separate states for each stage of the selection process
+			//There is one state per type of selection they need to make
+			
 		}else if (state == 3){ //Suggestion part 1
 			String[] chars = new String[]{"Mrs_Peacock", "Colonel_Mustard","Miss_Scarlet", "Mrs_White", "Professor_Plum", "Reverend_Green"};
 			for (CharName c : CharName.values()){
@@ -107,7 +124,7 @@ public class InputManager {
 			
 			state++;
 			sendChoices();
-		}else if (state == 4){ //Suggestion part 1
+		}else if (state == 4){ //Suggestion part 2
 			String[] weps = new String[]{"CANDLESTICK", "DAGGER","LEADPIPE", "REVOLVER", "ROPE", "SPANNER"};
 			for (WeaponType w : WeaponType.values()){
 				if (w.toString().equals(weps[i])){
@@ -167,7 +184,6 @@ public class InputManager {
 	private void moveCommand(){
 		
 		int canMove = game.rollDice();
-		System.out.println("You rolled: " + canMove);
 		game.UI.boardController.getView().canMove(true);
 		
 	}
