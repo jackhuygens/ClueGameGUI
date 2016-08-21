@@ -96,7 +96,7 @@ public class BoardView extends JPanel implements MouseListener{
 						break;
 				}
 				
-				if(pressed != null && new Rectangle(x, y, size, size).contains(pressed)){
+				if(pressed != null && new Rectangle(x, y, size, size).contains(pressed) && moving){
 					System.out.println("You clicked coordinate: " + (k - 1) + " " + (i - 1));
 					g.setColor(Color.black);
 					g.fillRect(x + 2, y + 2, size - 4, size - 4);

@@ -23,7 +23,9 @@ public class InputManager {
 	 * 2 = player in room
 	 * 3 = suggestion part 1
 	 * 4 = suggest part 2
-	 * 
+	 * 5 = accusal part 1
+	 * 6 = accusal part 2
+	 * 7 = accusal part 3
 	 * 
 	 */
 	public ChoiceController cc;
@@ -49,11 +51,17 @@ public class InputManager {
 		if (state == 1){ //State 1 = Between rooms
 			cc.setChoices(new String[]{"Move", "End turn"}, "You are not in a room");
 		}
-		else if (state == 2){ //State 2 = In Room
+		else if (state == 2){ //State 2 = In Room'
 			cc.setChoices(new String[]{"Move", "Suggest","Accuse", "End turn"}, "You are in a room");
 		}else if (state == 3){ //State 3 = Suggestion part 1
 			cc.setChoices(new String[]{"Mrs Peacock", "Colonel Mustard","Miss Scarlet", "Mrs White", "Professor Plum", "Reverend Green"}, "Who do you Suggest?");
 		}else if (state == 4){ //State 4  = Suggestion part 2
+			cc.setChoices(new String[]{"Candlestick", "Dagger","Lead Pipe", "Revolver", "Rope", "Spanner"}, "What weapon do you Suggest?");
+		}else if (state == 5){ //State 5  = Accusal part 1
+			cc.setChoices(new String[]{"Mrs Peacock", "Colonel Mustard","Miss Scarlet", "Mrs White", "Professor Plum", "Reverend Green"}, "Who do you Suggest?");
+		}else if (state == 6){ //State 6  = Accusal part 6
+			cc.setChoices(new String[]{"Ball Room", "Billiard Room", "Colonel Mustard", "Conservatory", "Dining Room", "Hall", "Kitchen", "Library", "Lounge", "Study"}, "Who do you Suggest?");
+		}else if (state == 7){ //State 6  = Accusal part 6
 			cc.setChoices(new String[]{"Candlestick", "Dagger","Lead Pipe", "Revolver", "Rope", "Spanner"}, "What weapon do you Suggest?");
 		}
 		else {
@@ -82,7 +90,8 @@ public class InputManager {
 				sendChoices();
 				break;
 			case 2:
-				makeAccusal();
+				state = 5; //Set to Accusal part 1
+				sendChoices();
 				break;
 			case 3:
 				game.endTurn();
@@ -110,152 +119,46 @@ public class InputManager {
 			}
 			state = 2;
 			game.makeSuggest(game.activePlayer.getCurrentRoom(), new Weapon(storeWep), new Character(storeChar));
-		}
-	}
-		
-		
-	
-	
-	/**
-	 * 
-	 * Calls the active player to print the clues in
-	 * their hand.
-	 * 
-	 */
-	private void printHand(){
-		System.out.println();
-		System.out.println("You have the following clues: ");
-		game.activePlayer.printHand();
-		System.out.println();
-	}
-	
-	/**
-	 * 
-	 * Takes input for making a suggestion and calls the makeSuggest method
-	 * in ClueGameGUI with those inputs.
-	 * 
-	 * 
-	 */
-	
-	
-	/**
-	 * 
-	 * Takes input for a player making an accusal and calls
-	 * the makeAccusal method in ClueGameGUI
-	 * 
-	 * 
-	 */
-	private void makeAccusal(){
-		Location loc = new Location(LocName.BALL_ROOM); //Defaults for initialization
-		Weapon wep = new Weapon(WeaponType.CANDLESTICK); 
-		Character cha = new Character(CharName.Mrs_Peacock); 
+			
+		}else if (state == 5){ //Accusal part 1
+			String[] chars = new String[]{"Mrs_Peacock", "Colonel_Mustard","Miss_Scarlet", "Mrs_White", "Professor_Plum", "Reverend_Green"};
+			for (CharName c : CharName.values()){
+				if (c.toString().equals(chars[i])){
+					storeChar = c;
+					System.out.println("Stored: " + c.toString());
+				}
+			}
+			
+			state++;
+			sendChoices();
+		}else if (state == 6){ //Accusal part 2
+			String[] weps = new String[]{"BALL_ROOM", "BILLIARD_ROOM", "COLONEL_MUSTARD", "CONSERVATORY", "DINING_ROOM", "HALL", "KITCHEN", "LIBRARY", "LOUNGE", "STUDY"};
+			for (LocName w : LocName.values()){
+				if (w.toString().equals(weps[i])){
+					storeLoc = w;
+					System.out.println("Stored: " + w.toString());
 
-		
-		System.out.println("Which character do you Accuse?");
-		int choice = getActionFromList(new String[] {
-				"Colonel Mustard",
-				"Miss Scarlet",
-				"Mrs Peacock",
-				"Professor Plum",
-				"Mrs White",
-				"The Reverend Green"});
-		
-		switch (choice){
-		case 0:
-			cha = new Character(CharName.Colonel_Mustard);
-			break;
-		case 1:
-			cha = new Character(CharName.Miss_Scarlet);
-			break;
-		case 2:
-			cha = new Character(CharName.Mrs_Peacock);
-			break;
-		case 3:
-			cha = new Character(CharName.Professor_Plum);
-			break;
-		case 4:
-			cha = new Character(CharName.Mrs_White);
-			break;
-		case 5:
-			cha = new Character(CharName.The_Reverend_Green);
-			break;
+				}
+			}
+			state++;
+			//game.makeSuggest(game.activePlayer.getCurrentRoom(), new Weapon(storeWep), new Character(storeChar));
+		}else if (state == 7){ //Accusal part 3
+			String[] weps = new String[]{"CANDLESTICK", "DAGGER","LEADPIPE", "REVOLVER", "ROPE", "SPANNER"};
+			for (WeaponType w : WeaponType.values()){
+				if (w.toString().equals(weps[i])){
+					storeWep = w;
+					System.out.println("Stored: " + w.toString());
+
+				}
+			}
+			state = 2;
+			game.makeAccusal( new Character(storeChar), new Location(storeLoc), new Weapon(storeWep));
 		}
-		
-		System.out.println("Which room do you Accuse?");
-		choice = getActionFromList(new String[] {
-				"Ball Room",
-				"Billiard Room",
-				"Conservatory",
-				"Dining Room",
-				"Hall",
-				"Kitchen",
-				"Library",
-				"Lounge",
-				"Study"});
-		switch (choice){
-		case 0:
-			loc  = new Location(LocName.BALL_ROOM);
-			break;
-		case 1:
-			loc  = new Location(LocName.BILLIARD_ROOM);
-			break;
-		case 2:
-			loc  = new Location(LocName.CONSERVATORY);
-			break;
-		case 3:
-			loc  = new Location(LocName.DINING_ROOM);
-			break;
-		case 4:
-			loc  = new Location(LocName.HALL);
-			break;
-		case 5:
-			loc  = new Location(LocName.KITCHEN);
-			break;
-		case 6:
-			loc  = new Location(LocName.LIBRARY);
-			break;
-		case 7:
-			loc  = new Location(LocName.LOUNGE);
-			break;
-		case 8:
-			loc  = new Location(LocName.STUDY);
-			break;
-		
-		
-		}
-		
-		System.out.println("Which weapon do you Accuse?");
-		choice = getActionFromList(new String[] {
-				"Candlestick",
-				"Dagger",
-				"Lead pipe",
-				"Revolver",
-				"Rope",
-				"Spanner"});
-		switch (choice){
-		case 0:
-			wep = new Weapon(WeaponType.CANDLESTICK);
-			break;
-		
-		case 1:
-			wep = new Weapon(WeaponType.DAGGER);
-			break;
-		case 2:
-			wep = new Weapon(WeaponType.LEADPIPE);
-			break;
-		case 3:
-			wep = new Weapon(WeaponType.REVOLVER);
-			break;
-		case 4:
-			wep = new Weapon(WeaponType.ROPE);
-			break;
-		case 5:
-			wep = new Weapon(WeaponType.SPANNER);
-			break;
-		}
-		
-		game.makeAccusal(cha, loc, wep);
 	}
+		
+		
+	
+	
 	
 	/**
 	 * 
@@ -266,49 +169,10 @@ public class InputManager {
 		
 		int canMove = game.rollDice();
 		System.out.println("You rolled: " + canMove);
-		
+		game.UI.boardController.getView().canMove(true);
 		
 	}
-	
-	/**
-	 * 
-	 * Asks for number of players
-	 * 
-	 * @return number of players
-	 */
-	public int getPlayerCount(){
-		System.out.println("How many players do you want?");
-		return getActionFromList(new String[] {
-				"", // will only show numbers, just like we want!
-				"",
-				"",
-				"",
-				"",
-				"" }) + 1;	
-	}
-	
-	/**
-	 * 
-	 * Takes an integer (0-3) for the player moving 
-	 * and returns the corresponding correct board coordinate.
-	 * 
-	 * @param input input for movement direction.
-	 * @return Coordinate of resulting movement.
-	 */
-	private Coordinate convertInputToVector(int input){
-		switch(input){
-		case 0:
-			return Board.UP;
-		case 1:
-			return Board.DOWN;
-		case 2:
-			return Board.RIGHT;
-		case 3:
-			return Board.LEFT;
-		}
-		
-		return null;
-	}
+
 	
 	/**
 	 * 

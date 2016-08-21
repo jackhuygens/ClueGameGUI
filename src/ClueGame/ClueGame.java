@@ -3,6 +3,8 @@ package ClueGame;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.JOptionPane;
+
 import ClueGame.Character.CharName;
 import ClueGame.Location.LocName;
 import ClueGame.Weapon.WeaponType;
@@ -202,14 +204,13 @@ public class ClueGame {
 		int movedX = activePlayer.getPosition().col - x;
 		int movedY = activePlayer.getPosition().row - y;
 		
-		System.out.println(movedX);
-		System.out.println(movedY);
-		
-		if (Math.abs(movedX) + Math.abs(movedY) > 1){System.out.println("Please pick an adjacent tile"); return;}
+		if (board.leaveRoom(activePlayer, new Coordinate(y,x))){input.state = 1; return;}
+		if (Math.abs(movedX) + Math.abs(movedY) > 1){JOptionPane.showMessageDialog(null, "Please click an ADJACENT tile to move to", "Info!", javax.swing.JOptionPane.INFORMATION_MESSAGE);; return;}
 		else {System.out.println("You can move here");}
 		
 		board.movePlayer(activePlayer, new Coordinate(-movedY,-movedX));
-		
+		UI.DiceController.setValue(UI.DiceController.getValue() - 1);
+		if(UI.DiceController.getValue() == 0){UI.boardController.getView().canMove(false);}
 		if (activePlayer.inRoom()){input.state = 2;} else {input.state = 1;}
 		input.sendChoices();
 	}
@@ -240,17 +241,14 @@ public class ClueGame {
 			for (int k = 0; k < numPly - 1; k++){
 				if (i == numPly){i = 0;}
 				for (Clue c : players[i].getHand()){			
-					if (wep.getType().equals(c.getType())){System.out.println("Player " + players[i].getNumber() + " has the " + c.getType()); if (!useTestingLogic){ TimeUnit.SECONDS.sleep(2);} return;}
-					if (cha.getType().equals(c.getType())){System.out.println("Player " + players[i].getNumber() + " has the " + c.getType()); if (!useTestingLogic) {TimeUnit.SECONDS.sleep(2);} return;}
-					if (loc.name().equals(c.getType())){System.out.println("Player " + players[i].getNumber() + " has the " + c.getType());  if (!useTestingLogic) {TimeUnit.SECONDS.sleep(2);} return;}
+					if (wep.getType().equals(c.getType())){JOptionPane.showMessageDialog(null,"Player " + players[i].getNumber() + " has the " + c.getType(), "INFO",javax.swing.JOptionPane.INFORMATION_MESSAGE); return;}
+					if (cha.getType().equals(c.getType())){JOptionPane.showMessageDialog(null,"Player " + players[i].getNumber() + " has the " + c.getType(),"INFO",javax.swing.JOptionPane.INFORMATION_MESSAGE);  return;}
+					if (loc.name().equals(c.getType())){JOptionPane.showMessageDialog(null,"Player " + players[i].getNumber() + " has the " + c.getType(),"INFO",javax.swing.JOptionPane.INFORMATION_MESSAGE); return;}
 				}
 				i++;
 			}
 			
-			System.out.println();
-			System.out.println("None of the other players can refute your suggestion");
-			System.out.println();
-			if (!useTestingLogic){ TimeUnit.SECONDS.sleep(2);}
+			JOptionPane.showMessageDialog(null, "None of the other players can refute you", "Info!", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 		}catch (Exception e){System.out.println("Whoops! Somthing went wrong there");}
 	}
 	
