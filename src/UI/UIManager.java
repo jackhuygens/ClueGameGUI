@@ -8,6 +8,11 @@ import javax.swing.*;
 
 import ClueGame.*;
 
+/**
+ * 
+ * Main UI class that handles all controllers, viewers and other helper classes.
+ *  
+ */
 public class UIManager {
 	
 	public ClueGame main;

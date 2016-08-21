@@ -13,6 +13,11 @@ import javax.swing.event.DocumentListener;
 import ClueGame.Character;
 import ClueGame.Player;
 
+/**
+ * 
+ * handles all menus and game setup UI functionality
+ *  
+ */
 public class MenuManager {
 	
 	private UIManager main;
@@ -67,6 +72,12 @@ public class MenuManager {
 		choosePlayerCount();
 	}
 	
+	/**
+	 * 
+	 * create a frame that allows the user to set names and characters for each player
+	 *  
+	 * @param count number of players to setup
+	 */
 	public void choosePlayerInfo(int count){
 		
 		main.main.setupGame(count);
@@ -103,6 +114,11 @@ public class MenuManager {
 		newGameFrame.setVisible(true); 
 	}
 	
+	/**
+	 * 
+	 * create a frame that allows the player to choose how many players they want (1-6)
+	 *  
+	 */
 	public void choosePlayerCount(){
 		
 		JFrame playerCountFrame = new JFrame("Choose players");
@@ -134,6 +150,11 @@ public class MenuManager {
 		playerCountFrame.setVisible(true); 
 	}
 	
+	/**
+	 * 
+	 * update all player setup panels
+	 *  
+	 */
 	public void refreshAllPlayerPanels(){
 		for(int i = 0; i < playerSettings.size(); i++){
 			refreshPlayerPanel(i);
@@ -141,6 +162,13 @@ public class MenuManager {
 		
 	}
 		
+	/**
+	 * 
+	 * update and re-draw the player setup panel (for a given panel).
+	 * this method also makes sure that players cannot choose a character that is already chosen!
+	 *  
+	 * @param index specific index of the player to re-draw
+	 */
 	public void refreshPlayerPanel(int index){
 		
 		Player[] players = main.main.getPlayers();
