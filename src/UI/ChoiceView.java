@@ -33,11 +33,10 @@ public class ChoiceView {
 
 		panel.removeAll();
 		
-		JLabel playerNameL = new JLabel("<html><center>" + playerName + "</center></html>");
-		playerNameL.setPreferredSize(new Dimension(130, 30));
+		JLabel playerNameL = new JLabel(playerName);
 		panel.add(playerNameL);
 		
-		JLabel statusL = new JLabel("<html><center>" + status + "</center></html>");
+		JLabel statusL = new JLabel("<html>" + status + "</html>");
 		statusL.setPreferredSize(new Dimension(130, 70));
 		panel.add(statusL);
 		
