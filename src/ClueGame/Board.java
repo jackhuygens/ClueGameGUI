@@ -180,13 +180,32 @@ public class Board {
 	 * 
 	 * move a player to a given room on the board.
 	 *  
-	 * @param player player to move.
+	 * @param p player to move.
 	 * @param loc Room to move to.
 	 */
 	public void movePlayerToRoom(Player p, LocName loc){
 		Coordinate cord = getRoomData(loc).getNextEmptyDoor(main);
 		p.setCurrentRoom(loc);
 		p.setPosition(cord);
+	}
+	
+	/**
+	 * 
+	 * attempt to move a player to a given door on the board.
+	 *  
+	 * @param p player to move.
+	 * @param door door to move to.
+	 */
+	public boolean leaveRoom(Player p, Coordinate door){
+		if(getTileAtCord(door) == TileType.ROOMENTRY && p.getCurrentRoom() != null){
+			RoomData data = getRoomData(p.getCurrentRoom());
+			if(data.ownsDoor(door)){
+				p.setCurrentRoom(null);
+				p.setPosition(door);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**
