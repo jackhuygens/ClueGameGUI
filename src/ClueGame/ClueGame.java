@@ -64,6 +64,7 @@ public class ClueGame {
 			board.spawnPlayer(p);
 		}
 		input.state = 1;
+		UI.ChoiceController.setCurrentPlayer(activePlayer.getName());
 		input.sendChoices();
 		UI.boardController.getView().repaint();
 	}
@@ -99,6 +100,7 @@ public class ClueGame {
 				nextPlayer = 0;
 			if(players[nextPlayer].getActive()){
 				activePlayer = players[nextPlayer];
+				UI.ChoiceController.setCurrentPlayer(activePlayer.getName());
 				if (activePlayer.inRoom()){input.state = 2;} else {input.state = 1;}
 				input.sendChoices();
 				break;

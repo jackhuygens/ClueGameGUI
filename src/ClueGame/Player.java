@@ -16,6 +16,12 @@ public class Player {
 	
 	ArrayList<Clue> hand = new ArrayList<Clue>();
 	
+	public Player(int playerNo){
+		this.playerNo = playerNo;
+		name = "player" + playerNo;
+		position = new Coordinate(0,0);
+	}
+	
 	public void addToHand(Clue clue){
 		hand.add(clue);
 	}
@@ -75,10 +81,7 @@ public class Player {
 		return false;
 	}
 	
-	public Player(int playerNo){
-		this.playerNo = playerNo;
-		position = new Coordinate(0,0);
-	}
+	
 	
 	public int getNumber(){
 		return playerNo;

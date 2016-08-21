@@ -11,6 +11,7 @@ public class ChoiceView {
 	private ChoiceController controller;
 	
 	private JPanel panel, parent;
+	private String playerName;
 		
 	public ChoiceView(JPanel parent){
 		this.parent = parent;
@@ -24,9 +25,17 @@ public class ChoiceView {
 		this.controller = controller;
 	}
 	
+	public void setCurrentPlayer(String playerName){
+		this.playerName = playerName;
+	}
+	
 	public void setChoices(String[] choices, String status){
 
 		panel.removeAll();
+		
+		JLabel playerNameL = new JLabel("<html><center>" + playerName + "</center></html>");
+		playerNameL.setPreferredSize(new Dimension(130, 30));
+		panel.add(playerNameL);
 		
 		JLabel statusL = new JLabel("<html><center>" + status + "</center></html>");
 		statusL.setPreferredSize(new Dimension(130, 100));

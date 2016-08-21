@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import ClueGame.Character;
 import ClueGame.Player;
 
@@ -145,11 +148,10 @@ public class MenuManager {
 		
 		final JTextField name = new JTextField(players[index].getName());
 		name.setPreferredSize(new Dimension(100, 24));
-		name.addActionListener(new ActionListener() {
-		      public void actionPerformed(ActionEvent e) {
-		        players[index].setName(name.getText());
-		      }
-		    });
+		name.getDocument().addDocumentListener(new DocumentListener() {
+			public void changedUpdate(DocumentEvent e) { players[index].setName(name.getText()); }
+			public void insertUpdate(DocumentEvent e) { players[index].setName(name.getText()); }
+			public void removeUpdate(DocumentEvent e) { players[index].setName(name.getText()); }});
 		panel.add(name);
 		
 		ArrayList<JRadioButton> charNames = new ArrayList<JRadioButton>();

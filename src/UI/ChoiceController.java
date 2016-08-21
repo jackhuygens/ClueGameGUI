@@ -20,6 +20,10 @@ public class ChoiceController {
 		view.setChoices(choices, status);
 	}
 	
+	public void setCurrentPlayer(String playerName){
+		view.setCurrentPlayer(playerName);
+	}
+	
 	public void selectChoice(int no){
 		//FIXME this
 		model.activateChoice(no);
