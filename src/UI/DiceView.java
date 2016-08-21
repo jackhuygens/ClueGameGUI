@@ -19,6 +19,9 @@ public class DiceView {
 		
 		panel.setBackground(new Color(236, 242, 248));
 		panel.setPreferredSize(new Dimension(140, 55));
+		
+		setDice(0);
+		
 		parent.add(panel);
 				
 	}
