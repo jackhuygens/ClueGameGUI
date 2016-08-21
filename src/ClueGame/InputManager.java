@@ -26,6 +26,8 @@ public class InputManager {
 	 * 5 = accusal part 1
 	 * 6 = accusal part 2
 	 * 7 = accusal part 3
+	 * 8 = player in hallway and MOVED
+	 * 9 = player in room and MOVED
 	 * 
 	 */
 	public ChoiceController cc;
@@ -35,24 +37,15 @@ public class InputManager {
 		this.cc = cc;
 		cc.setModel(this);
 	}
-	
-	/**
-	 * 
-	 * Deals with all a players input for their turn.
-	 * 
-	 * @param cannotMove Boolean for whether the player is allowed to move.
-	 */
-	public void processInput(boolean cannotMove){
-			
-	}
-	
+		
 	
 	public void sendChoices(){
 		if (state == 1){ //State 1 = Between rooms
-			cc.setChoices(new String[]{"Move", "End turn"}, "You are not in a room");
-		}
-		else if (state == 2){ //State 2 = In Room'
-			cc.setChoices(new String[]{"Move", "Suggest","Accuse", "End turn"}, "You are in a room");
+			cc.setChoices(new String[]{"Move", "End turn"}, "You are in the hallways");
+		}else if (state == 8){ //State 8 = Between rooms and cannot move'
+			cc.setChoices(new String[]{"End turn"}, "You are in the hallways");
+		}else if (state == 2){ //State 2 = In Room'
+			cc.setChoices(new String[]{"Move", "Suggest","Accuse", "End turn"}, "You are in the " + game.activePlayer.getCurrentRoom());
 		}else if (state == 3){ //State 3 = Suggestion part 1
 			cc.setChoices(new String[]{"Mrs Peacock", "Colonel Mustard","Miss Scarlet", "Mrs White", "Professor Plum", "Reverend Green"}, "Who do you Suggest?");
 		}else if (state == 4){ //State 4  = Suggestion part 2
@@ -79,6 +72,12 @@ public class InputManager {
 					game.endTurn();
 					break;
 					
+			}
+		}else if (state == 8){
+			switch (i){
+			case 0:
+				game.endTurn();
+				break;
 			}
 		}else if (state == 2){ //In room
 			switch (i){
@@ -141,7 +140,7 @@ public class InputManager {
 				}
 			}
 			state++;
-			//game.makeSuggest(game.activePlayer.getCurrentRoom(), new Weapon(storeWep), new Character(storeChar));
+			sendChoices();
 		}else if (state == 7){ //Accusal part 3
 			String[] weps = new String[]{"CANDLESTICK", "DAGGER","LEADPIPE", "REVOLVER", "ROPE", "SPANNER"};
 			for (WeaponType w : WeaponType.values()){
@@ -162,7 +161,7 @@ public class InputManager {
 	
 	/**
 	 * 
-	 * Takes in the input for players moving and calls the board to move the player.
+	 * Rolls the dice and begins the move sequence for the player
 	 * 
 	 */
 	private void moveCommand(){
@@ -173,34 +172,6 @@ public class InputManager {
 		
 	}
 
-	
-	/**
-	 * 
-	 * Takes a list of actions the player
-	 * can take and asks for the user to input a number corresponding to the
-	 * list.
-	 * 
-	 * 
-	 * @param list The list of actions
-	 * @return The integer corresponding to the action the player selects.
-	 */
-	private int getActionFromList(String[] list){
-		for (int i = 1; i <= list.length; i++){	
-			System.out.println(i + " : " + list[i-1]);
-		}
-		while(true){
-			System.out.println("please enter the number of your choice : ");
-			
-			//try{
-				//int res = Integer.parseInt(input);
-				//if(res <= list.length)
-				//	return res-1;
-			//}
-			//catch (NumberFormatException e){
-			//	continue;
-			//}
-		}
-	}	
 }
 
 

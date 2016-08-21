@@ -204,14 +204,14 @@ public class ClueGame {
 		int movedX = activePlayer.getPosition().col - x;
 		int movedY = activePlayer.getPosition().row - y;
 		
-		if (board.leaveRoom(activePlayer, new Coordinate(y,x))){input.state = 1; return;}
-		if (Math.abs(movedX) + Math.abs(movedY) > 1){JOptionPane.showMessageDialog(null, "Please click an ADJACENT tile to move to", "Info!", javax.swing.JOptionPane.INFORMATION_MESSAGE);; return;}
+		if (board.leaveRoom(activePlayer, new Coordinate(y,x))){input.state = 8; return;}
+		if (Math.abs(movedX) + Math.abs(movedY) > 1){JOptionPane.showMessageDialog(null, "Please click an ADJACENT tile to move to", "Info!", javax.swing.JOptionPane.INFORMATION_MESSAGE); return;}
 		else {System.out.println("You can move here");}
 		
 		board.movePlayer(activePlayer, new Coordinate(-movedY,-movedX));
 		UI.DiceController.setValue(UI.DiceController.getValue() - 1);
 		if(UI.DiceController.getValue() == 0){UI.boardController.getView().canMove(false);}
-		if (activePlayer.inRoom()){input.state = 2;} else {input.state = 1;}
+		if (activePlayer.inRoom()){input.state = 2;} else {input.state = 8;}
 		input.sendChoices();
 	}
 	
