@@ -1,6 +1,8 @@
 package UI;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -8,7 +10,7 @@ import ClueGame.ClueGame;
 import ClueGame.Player;
 
 
-public class BoardView extends JPanel{
+public class BoardView extends JPanel implements MouseListener{
 	
 	ClueGame game;
 	Frame frame;
@@ -17,6 +19,7 @@ public class BoardView extends JPanel{
 	public BoardView(ClueGame game, Frame frame){
 		this.game = game;
 		this.frame = frame;
+		addMouseListener(this);
 	}
 	
 	public void paint(Graphics g){
@@ -56,7 +59,7 @@ public class BoardView extends JPanel{
 		int y = 0;
 		int size = 30;
 		
-		if (frame.HEIGHT > frame.WIDTH){size = frame.HEIGHT;} else {size = frame.WIDTH;}
+		if (frame.getSize().height > frame.getSize().width){size = frame.getSize().height / 35;} else {size = frame.getSize().width / 35;}
 			
 		
 		
@@ -135,10 +138,40 @@ public class BoardView extends JPanel{
 				
 			}
 			
-			g.fillOval((p.getPosition().col + 1) * size + 5, (p.getPosition().row + 1) * size + 5, 20, 20);
+			g.fillOval((p.getPosition().col + 1) * size + 1, (p.getPosition().row + 1) * size + 1, size - 3  , size - 3 );
 			g.setColor(Color.BLACK);
-			g.drawOval((p.getPosition().col + 1) * size + 5, (p.getPosition().row + 1) * size + 5, 20, 20);
+			g.drawOval((p.getPosition().col + 1) * size + 1, (p.getPosition().row + 1) * size + 1, size - 3, size - 3);
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		System.out.println("Click!");
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
