@@ -207,6 +207,7 @@ public class ClueGame {
 		
 		if (Math.abs(movedX) + Math.abs(movedY) > 1){System.out.println("Please pick an adjacent tile"); return;}
 		else {System.out.println("You can move here");}
+		
 		board.movePlayer(activePlayer, new Coordinate(-movedY,-movedX));
 		
 		if (activePlayer.inRoom()){input.state = 2;} else {input.state = 1;}

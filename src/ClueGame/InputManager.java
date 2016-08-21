@@ -89,20 +89,23 @@ public class InputManager {
 				break;
 			}	
 		}else if (state == 3){ //Suggestion part 1
-			String[] chars = new String[]{"Mrs Peacock", "Colonel Mustard","Miss Scarlet", "Mrs White", "Professor Plum", "Reverend Green"};
+			String[] chars = new String[]{"Mrs_Peacock", "Colonel_Mustard","Miss_Scarlet", "Mrs_White", "Professor_Plum", "Reverend_Green"};
 			for (CharName c : CharName.values()){
 				if (c.toString().equals(chars[i])){
 					storeChar = c;
+					System.out.println("Stored: " + c.toString());
 				}
 			}
 			
 			state++;
 			sendChoices();
 		}else if (state == 4){ //Suggestion part 1
-			String[] weps = new String[]{"Candlestick", "Dagger","Lead Pipe", "Revolver", "Rope", "Spanner"};
+			String[] weps = new String[]{"CANDLESTICK", "DAGGER","LEADPIPE", "REVOLVER", "ROPE", "SPANNER"};
 			for (WeaponType w : WeaponType.values()){
 				if (w.toString().equals(weps[i])){
 					storeWep = w;
+					System.out.println("Stored: " + w.toString());
+
 				}
 			}
 			state = 2;
