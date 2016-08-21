@@ -25,7 +25,7 @@ public class UIManager {
 		
 		// create frame
 		frame = new JFrame("Cludo");
-		frame.setSize(600,600);
+		frame.setSize(800,800);
 		frame.setLayout(new BorderLayout());
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() {
@@ -53,23 +53,24 @@ public class UIManager {
 		// create all other components, and store then in the side bar
 		
 		// start game button:
-		JButton b = new JButton("New Game");
+		final JButton b = new JButton("New Game");
 		b.setToolTipText("Start a new game of Cluedo");
 		b.setPreferredSize(new Dimension(140, 24));
 		b.addActionListener(new ActionListener() { 
 		  public void actionPerformed(ActionEvent e) { 
-			menu.setupGame();  
+			  b.setEnabled(false);
+			  menu.setupGame();  
 		  }});
 		handPanel.add(b);
 		
-		// viewers that don't need a controller reference:
-		handController =  new HandController(new HandView(handPanel), main.activePlayer);
+		
 		DiceController =  new DiceController(new DiceView(handPanel), main.input);
 		
-		// viewers that DO need a controller reference:
 		ChoiceView cv = new ChoiceView(handPanel);
 		ChoiceController =  new ChoiceController(cv, main.input);
 		cv.setController(ChoiceController);
+		
+		handController =  new HandController(new HandView(handPanel), main.activePlayer);
 		
 		frame.setVisible(true); 
 	}

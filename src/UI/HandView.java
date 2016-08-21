@@ -20,29 +20,28 @@ public class HandView {
 		this.parent = parent;
 		panel = new JPanel();
 		panel.setBackground(new Color(236, 242, 248));
-		panel.setPreferredSize(new Dimension(140, 130));
+		panel.setPreferredSize(new Dimension(140, 230));
 		parent.add(panel);	
-		
-		//FIXME delete this
-		ArrayList<Clue> hand = new ArrayList<Clue>();
-		hand.add(new Weapon(WeaponType.REVOLVER));
-		hand.add(new Weapon(WeaponType.REVOLVER));
-		hand.add(new Weapon(WeaponType.REVOLVER));
-		setHand(hand);
+
 	}
 	
 	public void setHand(ArrayList<Clue> hand) {
 		
 		panel.removeAll();
 		JLabel j = new JLabel("Cards:");
-		j.setPreferredSize(new Dimension(140, 20));
+		j.setPreferredSize(new Dimension(140, 16));
 		j.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(j);
 		for(int i = 0; i < hand.size(); i++){
-			//FIXME use images!
-			JButton b = new JButton("");
-			b.setPreferredSize(new Dimension(40, 80));
-			panel.add(b);
+
+			String card = hand.get(i).getType();
+			card = card.replace('_', ' ');
+			card = card.toLowerCase();
+			JLabel l = new JLabel("<html><center>" + card + "</center></html>");
+			Font oldFont = l.getFont();
+			//l.setFont(new Font(oldFont.getName(), Font.PLAIN, 8));
+			l.setPreferredSize(new Dimension(130, 12));
+			panel.add(l);
 		}
     }
 }

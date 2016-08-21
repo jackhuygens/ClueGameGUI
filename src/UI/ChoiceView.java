@@ -17,7 +17,7 @@ public class ChoiceView {
 		this.parent = parent;
 		panel = new JPanel();
 		panel.setBackground(new Color(236, 242, 248));
-		panel.setPreferredSize(new Dimension(140, 300));
+		panel.setPreferredSize(new Dimension(140, 330));
 		parent.add(panel);
 	}
 	
@@ -38,7 +38,7 @@ public class ChoiceView {
 		panel.add(playerNameL);
 		
 		JLabel statusL = new JLabel("<html><center>" + status + "</center></html>");
-		statusL.setPreferredSize(new Dimension(130, 100));
+		statusL.setPreferredSize(new Dimension(130, 70));
 		panel.add(statusL);
 		
 		for(int i = 0; i < choices.length; i++){

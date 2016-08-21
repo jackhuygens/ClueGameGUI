@@ -65,6 +65,7 @@ public class ClueGame {
 		}
 		input.state = 1;
 		UI.ChoiceController.setCurrentPlayer(activePlayer.getName());
+		UI.handController.setHand(activePlayer.hand);
 		input.sendChoices();
 		UI.boardController.getView().repaint();
 	}
@@ -101,6 +102,7 @@ public class ClueGame {
 			if(players[nextPlayer].getActive()){
 				activePlayer = players[nextPlayer];
 				UI.ChoiceController.setCurrentPlayer(activePlayer.getName());
+				UI.handController.setHand(activePlayer.hand);
 				if (activePlayer.inRoom()){input.state = 2;} else {input.state = 1;}
 				input.sendChoices();
 				break;

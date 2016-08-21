@@ -72,6 +72,7 @@ public class MenuManager {
 		main.main.setupGame(count);
 		
 		JFrame newGameFrame = new JFrame("New Game");
+		newGameFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		newGameFrame.setSize(470,count * 100 + 80);	
 		newGameFrame.setVisible(true); 
 		
@@ -105,6 +106,7 @@ public class MenuManager {
 	public void choosePlayerCount(){
 		
 		JFrame playerCountFrame = new JFrame("Choose players");
+		playerCountFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		playerCountFrame.setSize(200,100);
 		
 		JPanel panel = new JPanel();
