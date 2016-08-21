@@ -39,7 +39,7 @@ public class UIManager {
 		menu = new MenuManager(this, frame);
 		
 		// create board panel 
-		BoardView view = new BoardView(main);
+		BoardView view = new BoardView(main, frame);
 		view.setBackground(Color.GRAY);
 		frame.add(view, BorderLayout.CENTER);
 		boardController =  new BoardController(view, main.board);

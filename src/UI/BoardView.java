@@ -11,10 +11,12 @@ import ClueGame.Player;
 public class BoardView extends JPanel{
 	
 	ClueGame game;
+	Frame frame;
 	
 	
-	public BoardView(ClueGame game){
+	public BoardView(ClueGame game, Frame frame){
 		this.game = game;
+		this.frame = frame;
 	}
 	
 	public void paint(Graphics g){
@@ -53,6 +55,10 @@ public class BoardView extends JPanel{
 		int x = 0;
 		int y = 0;
 		int size = 30;
+		
+		if (frame.HEIGHT > frame.WIDTH){size = frame.HEIGHT;} else {size = frame.WIDTH;}
+			
+		
 		
 		for (int i = 0; i < tiles.length; i++){
 			x = 0;
