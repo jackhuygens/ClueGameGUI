@@ -42,6 +42,13 @@ public class ClueGame {
 		numPly = i;
 	}
 	
+	/**
+	 * Fills the player array with players ,creates the solution, and deals the
+	 * player cards.
+	 * 
+	 * 
+	 * @param playerNo The number of players to create
+	 */
 	public void setupGame(int playerNo){
 		fillClueSets();
 			
@@ -60,6 +67,11 @@ public class ClueGame {
 		
 	}
 	
+	/**
+	 * Spawns the players, and sets the state in the input manager to active.
+	 * 
+	 * 
+	 */
 	public void startGame(){
 		for (Player p : players){
 			board.spawnPlayer(p);
@@ -199,13 +211,21 @@ public class ClueGame {
 		
 	}
 	
-	public void beginMove(int x, int y, int dice){
+	/**
+	 * 
+	 * Determines whether the player can move to the chosen tile, and if they can,
+	 * move them and set the input manager to the correct state. If the dice number becomes zero, the player
+	 * can no longer move.
+	 * 
+	 * @param x The x coordinate on the board to move to
+	 * @param y The y coordinate on the board to move to
+	 */
+	public void beginMove(int x, int y){
 		int movedX = activePlayer.getPosition().col - x;
 		int movedY = activePlayer.getPosition().row - y;
 		
 		if (board.leaveRoom(activePlayer, new Coordinate(y,x))){input.state = 8; return;}
 		if (Math.abs(movedX) + Math.abs(movedY) > 1){JOptionPane.showMessageDialog(null, "Please click an ADJACENT tile to move to", "Info!", javax.swing.JOptionPane.INFORMATION_MESSAGE); return;}
-		else {System.out.println("You can move here");}
 		
 		board.movePlayer(activePlayer, new Coordinate(-movedY,-movedX));
 		UI.DiceController.setValue(UI.DiceController.getValue() - 1);
