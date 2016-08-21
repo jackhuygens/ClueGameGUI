@@ -22,10 +22,37 @@ public class MenuManager {
 		this.frame = frame;
 		
 		JMenuBar bar = new JMenuBar();
+		
 		JMenu fileMenu = new JMenu("File");
+		fileMenu.setMnemonic(KeyEvent.VK_F);
+		
 		JMenu helpMenu = new JMenu("Help");
-		fileMenu.add(new JMenuItem("Quit"));
-		helpMenu.add(new JMenuItem("About"));
+		fileMenu.setMnemonic(KeyEvent.VK_H);
+		
+		JMenuItem quit = new JMenuItem("Quit");
+		JMenuItem about = new JMenuItem("About");
+				
+	    quit.setAccelerator(KeyStroke.getKeyStroke("control Q"));
+	    about.setAccelerator(KeyStroke.getKeyStroke("control H"));
+	    
+	    quit.setToolTipText("Quit Cluedo");
+	    about.setToolTipText("View more information about Cluedo");
+		
+		about.addActionListener(new ActionListener() { 
+			  public void actionPerformed(ActionEvent e) { 
+				  JOptionPane.showMessageDialog(frame, "Created by Jack Huygens and Alex Ruston (2016)");
+			  }});
+		
+		quit.addActionListener(new ActionListener() { 
+			  public void actionPerformed(ActionEvent e) { 
+				  int answer = JOptionPane.showConfirmDialog(frame, "Are you sure you want to quit?", "Quit", JOptionPane.YES_NO_OPTION);
+				  if (answer == JOptionPane.YES_OPTION)
+					  System.exit(0);
+			  }});
+		
+		
+		fileMenu.add(quit);
+		helpMenu.add(about);
 		
 		bar.add(fileMenu);
 		bar.add(helpMenu);
@@ -42,7 +69,7 @@ public class MenuManager {
 		main.main.setupGame(count);
 		
 		JFrame newGameFrame = new JFrame("New Game");
-		newGameFrame.setSize(470,count * 100 + 30);	
+		newGameFrame.setSize(470,count * 100 + 80);	
 		newGameFrame.setVisible(true); 
 		
 		JPanel mainPanel = new JPanel();
@@ -64,7 +91,6 @@ public class MenuManager {
 		b.setPreferredSize(new Dimension(140, 24));
 		b.addActionListener(new ActionListener() { 
 		  public void actionPerformed(ActionEvent e) { 
-			  //FIXME
 			  newGameFrame.setVisible(false); 
 			  main.main.startGame(); 
 		  }});

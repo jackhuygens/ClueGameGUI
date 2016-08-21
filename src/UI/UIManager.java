@@ -49,6 +49,7 @@ public class UIManager {
 		
 		// start game button:
 		JButton b = new JButton("New Game");
+		b.setToolTipText("Start a new game of Cluedo");
 		b.setPreferredSize(new Dimension(140, 24));
 		b.addActionListener(new ActionListener() { 
 		  public void actionPerformed(ActionEvent e) { 

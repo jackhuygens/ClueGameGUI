@@ -1,6 +1,6 @@
 package UI;
 
-import ClueGame.InputManager;
+import ClueGame.*;
 
 public class DiceController {
 
@@ -12,7 +12,7 @@ public class DiceController {
 		this.view = view;
 	}
 	
-	public void update(){
-		//view.hand = model.getHand();
+	public void setValue(int val){
+		view.setDice(val);
 	}
 }

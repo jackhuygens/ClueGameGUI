@@ -24,7 +24,7 @@ public class ClueGame {
 	public Player[] players;
 	int numPly; //Number of players
 	public Player activePlayer;
-	UIManager UI;
+	public UIManager UI;
 	
 	public boolean playing = true;
 	public static boolean useTestingLogic;
@@ -258,7 +258,9 @@ public class ClueGame {
 	 * @return integer from 1 to 6
 	 */
 	public int rollDice(){
-		return new Random().nextInt(6) + 1;
+		int diceValue = new Random().nextInt(6) + 1;
+		UI.DiceController.setValue(diceValue);
+		return diceValue;
 	}
 
 	/**

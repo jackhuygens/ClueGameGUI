@@ -20,10 +20,7 @@ public class DiceView {
 		panel.setBackground(new Color(236, 242, 248));
 		panel.setPreferredSize(new Dimension(140, 55));
 		parent.add(panel);
-		
-		//FIXME delete this
-		setDice(5);
-		
+				
 	}
 	
 	public void setDice(int val){
@@ -38,6 +35,9 @@ public class DiceView {
 			//FIXME  this
 			 //controller >> rollDice, maybe?   
 		  }});
+		b.setEnabled(false);
 		panel.add(b);
+		panel.revalidate();
+		panel.repaint();
 	}
 }
