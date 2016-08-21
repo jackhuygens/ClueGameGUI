@@ -6,6 +6,11 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+/**
+ * 
+ * handles all aspects of drawing the choice panel to the UI.
+ *  
+ */
 public class ChoiceView {
 	
 	private ChoiceController controller;
@@ -28,6 +33,14 @@ public class ChoiceView {
 	public void setCurrentPlayer(String playerName){
 		this.playerName = playerName;
 	}
+	
+	/**
+	 * 
+	 * update and re-draw the choice panel to reflect new options for the player.
+	 *  
+	 * @param choices string array representing each option the player has 
+	 * @param status message to display above choices
+	 */
 	
 	public void setChoices(String[] choices, String status){
 

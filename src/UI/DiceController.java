@@ -2,6 +2,11 @@ package UI;
 
 import ClueGame.*;
 
+/**
+ * 
+ * handles all communication between the viewer and model.
+ *  
+ */
 public class DiceController {
 
 	private DiceView view;

@@ -9,6 +9,11 @@ import ClueGame.Clue;
 import ClueGame.Weapon;
 import ClueGame.Weapon.WeaponType;
 
+/**
+ * 
+ * handles all aspects of drawing the hand panel to the UI.
+ *  
+ */
 public class HandView {
 	
 	private JPanel panel, parent;
@@ -25,6 +30,13 @@ public class HandView {
 
 	}
 	
+	/**
+	 * 
+	 * update and re-draw the hand panel to reflect the cards owned by the current player
+	 *  
+	 * @param hand list of clue cards owned by the player
+	 */
+	
 	public void setHand(ArrayList<Clue> hand) {
 		
 		panel.removeAll();
@@ -38,8 +50,6 @@ public class HandView {
 			card = card.replace('_', ' ');
 			card = card.toLowerCase();
 			JLabel l = new JLabel("<html><center>" + card + "</center></html>");
-			Font oldFont = l.getFont();
-			//l.setFont(new Font(oldFont.getName(), Font.PLAIN, 8));
 			l.setPreferredSize(new Dimension(130, 12));
 			panel.add(l);
 		}

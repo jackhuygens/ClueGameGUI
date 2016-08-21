@@ -8,6 +8,11 @@ import javax.swing.*;
 
 import ClueGame.Clue;
 
+/**
+ * 
+ * handles all aspects of drawing the dice panel to the UI.
+ *  
+ */
 public class DiceView {
 	
 	private JPanel panel, parent;
@@ -26,6 +31,12 @@ public class DiceView {
 				
 	}
 	
+	/**
+	 * 
+	 * update and re-draw the dice panel
+	 *  
+	 * @param val value to display on the dice
+	 */
 	public void setDice(int val){
 		
 		panel.removeAll();
@@ -33,11 +44,6 @@ public class DiceView {
 		panel.add(new JLabel("Dice:  "));
 		JButton b = new JButton("" + val);
 		b.setPreferredSize(new Dimension(45, 45));
-		b.addActionListener(new ActionListener() { 
-		  public void actionPerformed(ActionEvent e) { 
-			//FIXME  this
-			 //controller >> rollDice, maybe?   
-		  }});
 		b.setEnabled(false);
 		panel.add(b);
 		panel.revalidate();

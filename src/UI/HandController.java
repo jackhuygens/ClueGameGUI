@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import ClueGame.*;
 
+/**
+ * 
+ * handles all communication between the viewer and model.
+ *  
+ */
 public class HandController {
 	
 	private HandView view;

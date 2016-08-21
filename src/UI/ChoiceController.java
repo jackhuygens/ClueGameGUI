@@ -2,6 +2,11 @@ package UI;
 
 import ClueGame.InputManager;
 
+/**
+ * 
+ * handles all communication between the viewer and model.
+ *  
+ */
 public class ChoiceController {
 
 	private ChoiceView view;
@@ -25,7 +30,6 @@ public class ChoiceController {
 	}
 	
 	public void selectChoice(int no){
-		//FIXME this
 		model.activateChoice(no);
 	}
 }
