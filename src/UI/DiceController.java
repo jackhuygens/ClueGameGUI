@@ -6,6 +6,7 @@ public class DiceController {
 
 	private DiceView view;
 	private InputManager model;
+	int value = 0;
 	
 	public DiceController(DiceView view, InputManager model){
 		this.model = model;
@@ -14,5 +15,10 @@ public class DiceController {
 	
 	public void setValue(int val){
 		view.setDice(val);
+		value = val;
+	}
+	
+	public int getValue(){
+		return value;
 	}
 }

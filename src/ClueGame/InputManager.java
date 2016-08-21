@@ -79,6 +79,7 @@ public class InputManager {
 				break;
 			case 1:
 				state = 3; //Set to suggestion part 1
+				sendChoices();
 				break;
 			case 2:
 				makeAccusal();
@@ -94,7 +95,9 @@ public class InputManager {
 					storeChar = c;
 				}
 			}
+			
 			state++;
+			sendChoices();
 		}else if (state == 4){ //Suggestion part 1
 			String[] weps = new String[]{"Candlestick", "Dagger","Lead Pipe", "Revolver", "Rope", "Spanner"};
 			for (WeaponType w : WeaponType.values()){
@@ -130,75 +133,7 @@ public class InputManager {
 	 * 
 	 * 
 	 */
-	private void makeSuggestion(){
-		
-		LocName loc = game.activePlayer.getCurrentRoom();
-		Weapon wep = new Weapon(WeaponType.CANDLESTICK); //Defaults for initialization
-		Character cha = new Character(CharName.Mrs_Peacock); 
-		
-		System.out.println("Which weapon do you suggest?");
-		int choice = getActionFromList(new String[] {
-				"Candlestick",
-				"Dagger",
-				"Lead pipe",
-				"Revolver",
-				"Rope",
-				"Spanner"});
-		switch (choice){
-		case 0:
-			wep = new Weapon(WeaponType.CANDLESTICK);
-			break;
-		
-		case 1:
-			wep = new Weapon(WeaponType.DAGGER);
-			break;
-		case 2:
-			wep = new Weapon(WeaponType.LEADPIPE);
-			break;
-		case 3:
-			wep = new Weapon(WeaponType.REVOLVER);
-			break;
-		case 4:
-			wep = new Weapon(WeaponType.ROPE);
-			break;
-		case 5:
-			wep = new Weapon(WeaponType.SPANNER);
-			break;
-		}
-		
-		System.out.println("Which character do you suggest?");
-		choice = getActionFromList(new String[] {
-				"Colonel Mustard",
-				"Miss Scarlet",
-				"Mrs Peacock",
-				"Professor Plum",
-				"Mrs White",
-				"The Reverend Green"});
-		
-		switch (choice){
-		case 0:
-			cha = new Character(CharName.Colonel_Mustard);
-			break;
-		case 1:
-			cha = new Character(CharName.Miss_Scarlet);
-			break;
-		case 2:
-			cha = new Character(CharName.Mrs_Peacock);
-			break;
-		case 3:
-			cha = new Character(CharName.Professor_Plum);
-			break;
-		case 4:
-			cha = new Character(CharName.Mrs_White);
-			break;
-		case 5:
-			cha = new Character(CharName.The_Reverend_Green);
-			break;
-		}
-		
-		game.makeSuggest(loc, wep, cha);
-		
-	}
+	
 	
 	/**
 	 * 
@@ -327,8 +262,6 @@ public class InputManager {
 	private void moveCommand(){
 		
 		int canMove = game.rollDice();
-		if(ClueGame.useTestingLogic)
-			canMove = 100;
 		System.out.println("You rolled: " + canMove);
 		
 		

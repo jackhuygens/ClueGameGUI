@@ -196,6 +196,21 @@ public class ClueGame {
 		
 	}
 	
+	public void beginMove(int x, int y, int dice){
+		int movedX = activePlayer.getPosition().col - x;
+		int movedY = activePlayer.getPosition().row - y;
+		
+		System.out.println(movedX);
+		System.out.println(movedY);
+		
+		if (Math.abs(movedX) + Math.abs(movedY) > 1){System.out.println("Please pick an adjacent tile"); return;}
+		else {System.out.println("You can move here");}
+		board.movePlayer(activePlayer, new Coordinate(-movedY,-movedX));
+		
+		if (activePlayer.inRoom()){input.state = 2;} else {input.state = 1;}
+		input.sendChoices();
+	}
+	
 	/**
 	 * Takes three clue item and makes a cluedo suggestion.
 	 * Scans all other players hands (clockwise) to see if their hands contain

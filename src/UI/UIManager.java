@@ -40,7 +40,7 @@ public class UIManager {
 		
 		// create board panel 
 		BoardView view = new BoardView(main, frame);
-		view.setBackground(Color.GRAY);
+		view.setBackground(Color.WHITE);
 		frame.add(view, BorderLayout.CENTER);
 		boardController =  new BoardController(view, main.board);
 		

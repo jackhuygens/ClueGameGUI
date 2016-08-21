@@ -14,12 +14,17 @@ public class BoardView extends JPanel implements MouseListener{
 	
 	ClueGame game;
 	Frame frame;
-	
+	public Point pressed = null;
+	boolean moving = false;
 	
 	public BoardView(ClueGame game, Frame frame){
 		this.game = game;
 		this.frame = frame;
 		addMouseListener(this);
+	}
+	
+	public void canMove(boolean canmove){
+		moving = canmove;
 	}
 	
 	public void paint(Graphics g){
@@ -54,6 +59,7 @@ public class BoardView extends JPanel implements MouseListener{
 		};
 		
 		if (game.players == null){return;}
+		super.paintComponent(g);
 		
 		int x = 0;
 		int y = 0;
@@ -90,28 +96,17 @@ public class BoardView extends JPanel implements MouseListener{
 						break;
 				}
 				
+				if(pressed != null && new Rectangle(x, y, size, size).contains(pressed)){
+					System.out.println("You clicked coordinate: " + (k - 1) + " " + (i - 1));
+					g.setColor(Color.black);
+					g.fillRect(x + 2, y + 2, size - 4, size - 4);
+					game.beginMove((k - 1), (i - 1), game.UI.DiceController.getValue());
+				}
+				
 				x += size;
 			}
 			y += size;
 		}
-		
-		//TODO: Finish this if theres time
-		
-		/*y = 0;
-		x = 0;
-		for (int i = 0; i < tiles.length; i++){
-			int switcher = 4;
-			for (int k = 0; k < tiles[i].length - 1; k++){
-				if (tiles[i][k] == 0 && tiles[i][k + 1] == 1){
-					g.setColor(new Color(42,17,14));
-					g.fillRect(x * size, y, 5, size);
-				}
-				x += size;
-			}
-			y += size;
-		}*/
-		
-			
 		
 		
 		for (Player p : game.players){ //REMEMBER! Added an extra outer layer of tiles, so player coordinates need to be shifted by 1
@@ -165,6 +160,9 @@ public class BoardView extends JPanel implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		System.out.println("Click!");
+		pressed = arg0.getPoint();
+		System.out.println(pressed.getX() + " " + pressed.getY());
+		repaint();
 		
 	}
 
