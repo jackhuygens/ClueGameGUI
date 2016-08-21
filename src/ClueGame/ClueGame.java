@@ -51,7 +51,6 @@ public class ClueGame {
 		for (int i = 0; i < numPly; i++){
 			players[i] = new Player (i + 1);
 			players[i].setCharacter(characters.get(i));
-			board.spawnPlayer(players[i]);
 		}
 		
 		activePlayer = players[0];

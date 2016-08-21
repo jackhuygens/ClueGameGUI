@@ -91,35 +91,8 @@ public class Board {
 	public void spawnPlayer(Player player){
 		
 		List<Coordinate> startOptions = getTilesOfType(TileType.START);
+		player.setPosition(startOptions.get(playerOrder[player.getCharacter().getName().ordinal()]));
 		
-		// use a different spawn system for test cases
-		if(main.useTestingLogic){
-			
-			boolean hasSpawned = false;
-	
-			for(Coordinate cord : startOptions){	
-				boolean placeTaken = false;
-				
-				for(Player checkPlayer : main.getPlayers()){
-					if(checkPlayer != null && checkPlayer.getPosition().equals(cord)){
-						placeTaken = true;
-					}		
-				}
-				
-				if(!placeTaken){
-					player.setPosition(cord);
-					hasSpawned = true;
-				}
-			}
-		
-			if(!hasSpawned){
-				// should never happen, assuming that a valid number of players were chosen
-				throw new RuntimeException("failed to spawn player");
-			}
-		}
-		else{
-			player.setPosition(startOptions.get(playerOrder[player.getNumber()-1]));
-		}
 	}
 	
 	
